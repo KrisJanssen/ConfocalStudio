@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfocalStudio", "ConfocalStudio\ConfocalStudio.csproj", "{53D68945-F4D7-4209-A6F0-4D1FA7EBA42D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{237A0625-64AD-4AD0-987D-476EEBB660F1}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{57135CB2-F664-4A43-B9DD-BD0398CAAD75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini", "..\lib\gemini\src\Gemini\Gemini.csproj", "{13DBFC87-C152-4A86-94B0-D9944BEEF647}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Output", "..\lib\gemini\src\Gemini.Modules.Output\Gemini.Modules.Output.csproj", "{B78AACC8-5A16-4951-83AD-B78D1C80A258}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.PropertyGrid", "..\lib\gemini\src\Gemini.Modules.PropertyGrid\Gemini.Modules.PropertyGrid.csproj", "{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.ErrorList", "..\lib\gemini\src\Gemini.Modules.ErrorList\Gemini.Modules.ErrorList.csproj", "{9F436232-52C4-4C2C-A83F-ADFE5B829484}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Inspector", "..\lib\gemini\src\Gemini.Modules.Inspector\Gemini.Modules.Inspector.csproj", "{0F8463BD-C1B0-4F2B-855D-49B6963B3337}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53D68945-F4D7-4209-A6F0-4D1FA7EBA42D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53D68945-F4D7-4209-A6F0-4D1FA7EBA42D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53D68945-F4D7-4209-A6F0-4D1FA7EBA42D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53D68945-F4D7-4209-A6F0-4D1FA7EBA42D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B78AACC8-5A16-4951-83AD-B78D1C80A258}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B78AACC8-5A16-4951-83AD-B78D1C80A258}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B78AACC8-5A16-4951-83AD-B78D1C80A258}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B78AACC8-5A16-4951-83AD-B78D1C80A258}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F436232-52C4-4C2C-A83F-ADFE5B829484}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F436232-52C4-4C2C-A83F-ADFE5B829484}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F436232-52C4-4C2C-A83F-ADFE5B829484}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F436232-52C4-4C2C-A83F-ADFE5B829484}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F8463BD-C1B0-4F2B-855D-49B6963B3337}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F8463BD-C1B0-4F2B-855D-49B6963B3337}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F8463BD-C1B0-4F2B-855D-49B6963B3337}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F8463BD-C1B0-4F2B-855D-49B6963B3337}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647} = {57135CB2-F664-4A43-B9DD-BD0398CAAD75}
+		{B78AACC8-5A16-4951-83AD-B78D1C80A258} = {57135CB2-F664-4A43-B9DD-BD0398CAAD75}
+		{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55} = {57135CB2-F664-4A43-B9DD-BD0398CAAD75}
+		{9F436232-52C4-4C2C-A83F-ADFE5B829484} = {57135CB2-F664-4A43-B9DD-BD0398CAAD75}
+		{0F8463BD-C1B0-4F2B-855D-49B6963B3337} = {57135CB2-F664-4A43-B9DD-BD0398CAAD75}
+	EndGlobalSection
+EndGlobal

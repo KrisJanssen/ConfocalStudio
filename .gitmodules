@@ -1,0 +1,6 @@
+[submodule "lib/gemini"]
+	path = lib/gemini
+	url = https://github.com/KrisJanssen/gemini.git
+[submodule "lib/Caliburn.Micro"]
+	path = lib/Caliburn.Micro
+	url = https://github.com/Caliburn-Micro/Caliburn.Micro.git
