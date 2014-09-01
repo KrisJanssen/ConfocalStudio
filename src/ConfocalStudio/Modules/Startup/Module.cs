@@ -61,13 +61,14 @@ namespace ConfocalStudio.Modules.Startup
         /// </summary>
         public override void Initialize()
         {
+            MainWindow.WindowState = WindowState.Maximized;
             MainWindow.Title = "Confocal Studio";
             MainWindow.Icon = resourceManager.GetBitmap("Resources/AppIcon.ico",
                 Assembly.GetExecutingAssembly().GetAssemblyName());
 
             Shell.ShowFloatingWindowsInTaskbar = true;
 
-            Shell.StatusBar.AddItem("This is Confocal Studio", new GridLength(1, GridUnitType.Star));
+            Shell.StatusBar.AddItem("Ready", new GridLength(1, GridUnitType.Star));
 
         }
     }
