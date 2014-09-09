@@ -1,86 +1,156 @@
 ﻿namespace CS.Hardware.Device
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Collections.Generic;
 
     /// <summary>
-    /// The property base.
+    /// The property base class implements some common functionality shared between different Property types.
     /// </summary>
     public abstract class PropertyBase : IProperty
     {
-        /// <summary>
-        /// The hasvalue.
-        /// </summary>
-        private bool hasvalue = false;
+        #region Private Fields
 
         /// <summary>
-        /// The haslimits.
+        /// A delegate that can be executed when a property is applied or updated.
         /// </summary>
-        private bool haslimits = false;
+        private Func<PropertyFuncType, bool> pfunc;
+
+        #endregion
 
         /// <summary>
-        /// The lowerlimit.
+        /// Initializes a new instance of the <see cref="PropertyBase"/> class.
         /// </summary>
-        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1121:UseBuiltInTypeAlias", Justification = "Reviewed. Suppression is OK here.")]
-        private double lowerlimit = Double.MinValue;
-
-        /// <summary>
-        /// The upperlimitlimit.
-        /// </summary>
-        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1121:UseBuiltInTypeAlias", Justification = "Reviewed. Suppression is OK here.")]
-        private double upperlimit = Double.MaxValue;
-
-        /// <summary>
-        /// Gets the kind.
-        /// </summary>
-        public abstract PropertyType Kind { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether has value.
-        /// </summary>
-        public bool HasValue
+        protected PropertyBase()
         {
-            get
-            {
-                return this.hasvalue;
-            }
+            this.HasLimits = false;
+            this.HasValue = false;
+            this.IsCached = false;
+            this.IsCached = false;
+            this.pfunc = null;
         }
 
         /// <summary>
-        /// Gets a value indicating whether the property has limits.
+        /// Gets type of the property.
         /// </summary>
-        public bool HasLimits
-        {
-            get
-            {
-                return this.haslimits;
-            }
-        }
+        public abstract PropertyType Type { get; }
 
         /// <summary>
-        /// Gets the lower limit.
+        /// Gets or sets a value indicating whether the property has limits.
         /// </summary>
-        public double LowerLimit
-        {
-            get
-            {
-                return this.haslimits ? this.upperlimit : 0d;
-            }
-        }
+        public bool HasLimits { get; protected set; }
 
         /// <summary>
-        /// Gets the upper limit.
+        /// Gets or sets a value indicating whether the property has value.
         /// </summary>
-        public double UpperLimit
-        {
-            get
-            {
-                return this.haslimits ? this.lowerlimit : 0d;
-            }
-        }
+        public bool HasValue { get; protected set; }
 
         /// <summary>
-        /// The get value.
+        /// Gets or sets a value indicating whether the property value is cached.
+        /// </summary>
+        public bool IsCached { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether is read only.
+        /// </summary>
+        public virtual bool IsReadOnly { get; protected set; }
+
+        /// <summary>
+        /// The is allowed.
+        /// </summary>
+        /// <param name="val">
+        /// The val.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public abstract bool IsAllowed(double val);
+
+        /// <summary>
+        /// The is allowed.
+        /// </summary>
+        /// <param name="val">
+        /// The val.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public abstract bool IsAllowed(long val);
+
+        /// <summary>
+        /// The is allowed.
+        /// </summary>
+        /// <param name="val">
+        /// The val.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public abstract bool IsAllowed(string val);
+
+        /// <summary>
+        /// The clear allowed values.
+        /// </summary>
+        public abstract void ClearAllowedValues();
+
+        /// <summary>
+        /// The get allowed values.
+        /// </summary>
+        /// <param name="values">
+        /// The values.
+        /// </param>
+        public abstract void GetAllowedValues(out Dictionary<string, double> values);
+
+        /// <summary>
+        /// The get allowed values.
+        /// </summary>
+        /// <param name="values">
+        /// The values.
+        /// </param>
+        public abstract void GetAllowedValues(out Dictionary<string, long> values);
+
+        /// <summary>
+        /// The get allowed values.
+        /// </summary>
+        /// <param name="values">
+        /// The values.
+        /// </param>
+        public abstract void GetAllowedValues(out Dictionary<string, string> values);
+
+        /// <summary>
+        /// The add allowed value.
+        /// </summary>
+        /// <param name="val">
+        /// The val.
+        /// </param>
+        /// <param name="data">
+        /// The data.
+        /// </param>
+        public abstract void AddAllowedValue(string val, double data);
+
+        /// <summary>
+        /// The add allowed value.
+        /// </summary>
+        /// <param name="val">
+        /// The val.
+        /// </param>
+        /// <param name="data">
+        /// The data.
+        /// </param>
+        public abstract void AddAllowedValue(string val, long data);
+
+        /// <summary>
+        /// The add allowed value.
+        /// </summary>
+        /// <param name="val">
+        /// The val.
+        /// </param>
+        /// <param name="data">
+        /// The data.
+        /// </param>
+        public abstract void AddAllowedValue(string val, string data);
+
+        /// <summary>
+        /// Gets the property value as a double.
         /// </summary>
         /// <param name="val">
         /// The val.
@@ -128,6 +198,39 @@
         public abstract void SetValue(long val);
 
         /// <summary>
+        /// The get limits.
+        /// </summary>
+        /// <param name="min">
+        /// The min.
+        /// </param>
+        /// <param name="max">
+        /// The max.
+        /// </param>
+        public abstract void GetLimits(out double min, out double max);
+
+        /// <summary>
+        /// The get limits.
+        /// </summary>
+        /// <param name="min">
+        /// The min.
+        /// </param>
+        /// <param name="max">
+        /// The max.
+        /// </param>
+        public abstract void GetLimits(out long min, out long max);
+
+        /// <summary>
+        /// The get limits.
+        /// </summary>
+        /// <param name="min">
+        /// The min.
+        /// </param>
+        /// <param name="max">
+        /// The max.
+        /// </param>
+        public abstract void GetLimits(out string min, out string max);
+
+        /// <summary>
         /// The set limits.
         /// </summary>
         /// <param name="lowerLimit">
@@ -136,17 +239,75 @@
         /// <param name="upperLimit">
         /// The upper limit.
         /// </param>
-        public void SetLimits(double lowerLimit, double upperLimit)
-        {
-            this.haslimits = true;
+        public abstract void SetLimits(double lowerLimit, double upperLimit);
 
-            if (lowerLimit >= upperLimit)
+        /// <summary>
+        /// The set limits.
+        /// </summary>
+        /// <param name="lowerLimit">
+        /// The lower limit.
+        /// </param>
+        /// <param name="upperLimit">
+        /// The upper limit.
+        /// </param>
+        public abstract void SetLimits(long lowerLimit, long upperLimit);
+
+        /// <summary>
+        /// The set limits.
+        /// </summary>
+        /// <param name="lowerLimit">
+        /// The lower limit.
+        /// </param>
+        /// <param name="upperLimit">
+        /// The upper limit.
+        /// </param>
+        public abstract void SetLimits(string lowerLimit, string upperLimit);
+
+        /// <summary>
+        /// Registers a <see cref="Func{PropertyFuncType,bool}"/> that is executed upon update or apply of a property value.
+        /// </summary>
+        /// <param name="propertyFunc">
+        /// The p func.
+        /// </param>
+        public void RegisterPropertyFunction(Func<PropertyFuncType, bool> propertyFunc)
+        {
+            this.pfunc = propertyFunc;
+        }
+
+        /// <summary>
+        /// The try apply.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool TryApply()
+        {
+            // TODO: Consider a caching system.
+            if (this.pfunc != null)
             {
-                this.haslimits = false;
+                return this.pfunc(PropertyFuncType.Apply);
             }
 
-            this.lowerlimit = lowerLimit;
-            this.upperlimit = upperLimit;
+            // If there is no function delegate, we can return true.
+            return true;
+        }
+
+        /// <summary>
+        /// The try update.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool TryUpdate()
+        {
+            // TODO: Consider a caching system.
+            if (this.pfunc != null)
+            {
+                return this.pfunc(PropertyFuncType.Update);
+            }
+
+            // If there is no function delegate, we can return true.
+            return true;
         }
     }
 }
