@@ -39,18 +39,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceBase.cs" />
     <Compile Include="DeviceType.cs" />
     <Compile Include="DuplicatePropertyException.cs" />
     <Compile Include="FloatProperty.cs" />
+    <Compile Include="GalvoBase.cs" />
+    <Compile Include="IGalvo.cs" />
+    <Compile Include="IDevice.cs" />
     <Compile Include="IntegerProperty.cs" />
     <Compile Include="InvalidPropertyException.cs" />
     <Compile Include="IProperty.cs" />
+    <Compile Include="ISerial.cs" />
+    <Compile Include="IXYStage.cs" />
+    <Compile Include="PortType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyBase.cs" />
     <Compile Include="PropertyCollection.cs" />
+    <Compile Include="PropertyFuncType.cs" />
     <Compile Include="PropertyNotFoundException.cs" />
+    <Compile Include="PropertyOutOfRangeException.cs" />
     <Compile Include="PropertyType.cs" />
+    <Compile Include="SerialBase.cs" />
+    <Compile Include="SerialManager.cs" />
     <Compile Include="StringProperty.cs" />
+    <Compile Include="ValueChangedEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />

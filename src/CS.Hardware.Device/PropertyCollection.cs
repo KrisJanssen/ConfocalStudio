@@ -3,6 +3,7 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Configuration;
 
     /// <summary>
     /// The property collection.
@@ -13,6 +14,14 @@
         /// The properties.
         /// </summary>
         private Dictionary<string, IProperty> properties;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PropertyCollection"/> class.
+        /// </summary>
+        public PropertyCollection()
+        {
+            this.properties = new Dictionary<string, IProperty>();
+        }
 
         /// <summary>
         /// Gets the count.
@@ -124,12 +133,23 @@
         /// </exception>
         public void Get(string name, out string value)
         {
-            if (!this.properties.ContainsKey(name))
-            {
-                throw new PropertyNotFoundException("Property " + name + " not found!");
-            }
+            // TODO: This seems dodgy. Perhaps find a better way to do all this.
+            value = string.Empty;
 
-            this.properties[name].GetValue(out value);
+            IProperty prop = this.Find(name);
+
+            // If the value is not cached, we get it from HW.
+            if (!prop.IsCached)
+            {
+                if (prop.TryUpdate())
+                {
+                    prop.GetValue(out value);
+                }
+            }
+            else
+            {
+                prop.GetValue(out value);
+            }
         }
 
         /// <summary>
@@ -146,12 +166,26 @@
         /// </exception>
         public void Set(string name, string value)
         {
-            if (!this.properties.ContainsKey(name))
-            {
-                throw new PropertyNotFoundException("Property " + name + " not found!");
-            }
+            // Try and get the property.
+            IProperty prop = this.Find(name);
 
-            this.properties[name].SetValue(value);
+            // If the property is not read-only we can try and set it.
+            if (!prop.IsReadOnly)
+            {
+                if (prop.IsAllowed(value))
+                { 
+                    // TODO: Consider the order of operations here... 
+                    // Should we check success on the Try before setting 
+                    // the value or should we just always set it?
+                    /*if (prop.TryApply())
+                    {
+                        prop.SetValue(value);
+                    }
+                    prop.SetValue(value);*/
+
+                    prop.TryApply();
+                }
+            }
         }
 
         /// <summary>
